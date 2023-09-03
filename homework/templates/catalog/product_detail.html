@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
     {% for object in object_list %}
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="card mb-4 box-shadow">
                 <img class={{object.preview}}
                     src='/media/{{ object.preview }}'
@@ -13,8 +13,8 @@
                     <p class="card-text">Цена: <b>{{ object.price }}</b> руб.</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="{% url 'homework:product_detail' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">К
-                            описанию товарa </a>
+                            <a href="{% url 'homework:full_list' %}" type="button" class="btn btn-sm btn-outline-secondary">К
+                            списку товаров </a>
                         </div>
                     </div>
                 </div>
