@@ -1,0 +1,17 @@
+{% load custom_filters %}
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <img class={{object.preview}}
+             src='/media/{{ object.preview }}'
+             alt={{object.preview}}>
+        <div class="card-body">
+            <p class="card-text">{{ object.description |slice_string:100 }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'homework:full_list' %}" type="button" class="btn btn-sm btn-outline-secondary">К
+                        полному списку и описанию товаров </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
