@@ -80,7 +80,7 @@ postgres_key = os.environ.get('postgres_passwords')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'web_work',
+        'NAME': 'django_work',
         'USER': 'postgres',
         'PASSWORD': postgres_key,
     }
