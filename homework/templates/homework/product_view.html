@@ -5,9 +5,9 @@
     {% for object in object_list %}
         <div class="col-md-8">
             <div class="card mb-4 box-shadow">
-                <img class={{object.preview}}
-                    src='/media/{{ object.preview }}'
-                    alt={{object.preview}}>
+                <img class="{{ object.preview }}"
+                    src="/media/{{ object.preview }}"
+                    alt="{{ object.preview }}">
                 <div class="card-body">
                     <p class="card-text">{{ object.description }}</p>
                     <p class="card-text">Цена: <b>{{ object.price }}</b> руб.</p>
@@ -20,6 +20,6 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
+    {% endfor %}
     </div>
 {% endblock %}
