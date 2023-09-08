@@ -1,9 +1,9 @@
-{% extends 'catalog/base.html' %}
+{% extends 'homework/base.html' %}
 
 {% block content %}
     <div class="row">
         {% for object in object_list %}
-            {% include 'catalog/includes/inc_category.html' %}
+            {% include 'homework/includes/inc_category.html' %}
         {% endfor %}
     </div>
 {% endblock %}

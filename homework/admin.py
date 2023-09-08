@@ -8,8 +8,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description', 'preview', 'price')
-    search_fields = ('name', 'description')
+    list_display = ('id', 'name', 'description', 'preview', 'price', 'category')
+    list_filter = ('category',)
 
 
 admin.site.register(Product, ProductAdmin)
