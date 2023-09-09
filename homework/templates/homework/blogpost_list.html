@@ -1,0 +1,18 @@
+{% extends 'homework/base.html' %}
+
+{% block content %}
+<a href="{% url 'homework:create' %}" class="btn btn-success">Создать пост</a>
+    <div class="row">
+        {% for blogpost in object_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ blogpost.title }}</h5>
+                        <p class="card-text">{{ blogpost.content }}</p>
+                        <a href="{% url 'homework:view' blogpost.pk %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
