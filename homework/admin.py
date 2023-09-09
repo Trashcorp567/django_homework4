@@ -1,5 +1,5 @@
 from django.contrib import admin
-from homework.models import Product, Category
+from homework.models import Product, Category, BlogPost
 # Register your models here.
 
 
@@ -12,5 +12,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category',)
 
 
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'slug', 'content', 'preview', 'created_at', 'is_published', 'views')
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(BlogPost, BlogPostAdmin)

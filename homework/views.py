@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from homework.models import Product, Category
+from django.urls import reverse_lazy, reverse
+from pytils.translit import slugify
+
+from homework.models import Product, Category, BlogPost
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # Create your views here.
 
@@ -44,3 +47,58 @@ def product_view(request, pk):
         'title': f'Товар - {category_item.name}'
     }
     return render(request, 'homework/product_view.html', context)
+
+
+class BlogPostListView(ListView):
+    model = BlogPost
+    
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_published=True)
+        return queryset
+
+
+class BlogPostDetailView(DetailView):
+    model = BlogPost
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.views += 1
+        self.object.save()
+        return self.object
+
+
+class BlogPostCreateView(CreateView):
+    model = BlogPost
+    fields = ('title', 'content', 'preview', 'is_published')
+    success_url = reverse_lazy('homework:list')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_content = form.save()
+            new_content.slug = slugify(new_content.title)
+            new_content.save()
+
+        return super().form_valid(form)
+
+
+class BlogPostUpdateView(UpdateView):
+    model = BlogPost
+    fields = ('title', 'content', 'preview', 'is_published')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            new_content = form.save()
+            new_content.slug = slugify(new_content.title)
+            new_content.save()
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('homework:view', args=[self.kwargs.get('pk')])
+
+
+class BlogPostDeleteView(DeleteView):
+    model = BlogPost
+    template_name = 'homework/blogpost_confirm_delete.html'
+    success_url = reverse_lazy('homework:list')
